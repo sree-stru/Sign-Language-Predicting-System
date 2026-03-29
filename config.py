@@ -32,3 +32,8 @@ LANDMARK_INPUT_SIZE = 42 # 21 landmarks * (x, y)
 CONFIDENCE_THRESHOLD = 0.60
 PREDICTION_DELAY_FRAMES = 10
 MAX_HANDS = 2
+
+# Gemini AI Integration
+# SECURITY: Use an environment variable for the API key instead of hardcoding it.
+import os
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "YOUR_GEMINI_API_KEY_HERE")

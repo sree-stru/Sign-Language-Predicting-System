@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignSpeak | Professional Sign Language Interpreter</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <span class="gradient-text">SignSpeak</span>
+                <span class="badge">PRO</span>
+            </div>
+            <div class="camera-controls">
+                <button id="btn-camera-on" class="btn-icon" title="Turn On Camera">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                </button>
+                <button id="btn-camera-off" class="btn-icon danger" title="Turn Off Camera">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l22 22M16 16l-1 1-7 5V7l2.2-1.58M16 11.35V5h-6.35M1 5h15"/></svg>
+                </button>
+            </div>
+            <div class="status-indicator">
+                <span class="dot" id="status-dot"></span>
+                <span id="status-text">Camera Stopped</span>
+            </div>
+        </header>
+
+        <main>
+            <section class="video-section">
+                <div class="video-wrapper">
+                    <video id="input_video" style="display:none;"></video>
+                    <canvas id="output_canvas"></canvas>
+                    <div id="prediction-overlay" class="prediction-overlay">
+                        <div id="prediction-progress" class="prediction-progress"></div>
+                        <span id="predicted-char">?</span>
+                        <span id="prediction-confidence">0%</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="control-section">
+                <div class="sentence-display">
+                    <div class="label">Current Sentence</div>
+                    <div id="sentence-text" class="content">...</div>
+                </div>
+
+                <div class="suggestions-container" id="suggestions">
+                    <!-- Suggestions will be populated here -->
+                </div>
+
+                <div id="refined-sentence" class="refined-output hidden">
+                    <div class="label">Refined by Gemini AI</div>
+                    <div id="refined-text" class="content">...</div>
+                </div>
+
+                <div class="actions">
+                    <button id="btn-add" class="btn secondary">Add Character</button>
+                    <button id="btn-space" class="btn secondary">Space</button>
+                    <button id="btn-refine" class="btn primary magic highlight">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:1.2rem; margin-right:5px;">
+                            <path d="M12 2l2.35 4.7L19 7.35l-3.35 3.3L16.35 15.3l-4.35-2.3L7.65 15.3l.65-4.65-3.35-3.3 4.65-.65L12 2z"/>
+                        </svg>
+                        Magic Refine
+                    </button>
+                    <button id="btn-speak" class="btn secondary">Speak</button>
+                    <button id="btn-delete" class="btn danger">Delete</button>
+                    <button id="btn-clear" class="btn danger-outline">Clear</button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 SignSpeak AI • Real-time Gesture Recognition</p>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
